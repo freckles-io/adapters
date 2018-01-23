@@ -5,3 +5,9 @@ doc:
 role-dependencies:
   - freckles-io.install-vagrant
   - freckles-io.install-virtualbox
+
+available_vars:
+  vagrant_providers:
+    help: "the list of vagrant providers to make available on this machine. currently only supports 'virtualbox'"
+  vagrant_plugins:
+      help: "the list of vagrant plugins to install"
