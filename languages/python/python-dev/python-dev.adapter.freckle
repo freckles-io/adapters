@@ -7,7 +7,7 @@ role-dependencies:
 available_vars:
   packages:
     help: "a list of (system or conda) packages to install"
-  python_version:
+  python_dev_version:
     help: "the version of python to use, defaults to '3'"
   python_dev_requirements_files:
     help: "a list of (pip) requirements files to use, defaults to all files in the freckle folder (recursively) which match the glob '.*requirements.*txt'."

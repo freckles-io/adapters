@@ -14,4 +14,4 @@
     python_dev_requirements_files: "{{ freckle_vars.get('python_dev_requirements_files', all_requirements_files) }}"
     python_dev_project_path: "{{ freckle_path }}"
     python_dev_dependency_packages: "{{ freckle_vars_raw.get('vars', []) | create_package_list_from_var_filter('packages') }}"
-    python_version: "{{ freckle_vars.get('python_version', '3') }}"
+    python_version: "{{ freckle_vars.get('python_dev_version', '3') }}"
