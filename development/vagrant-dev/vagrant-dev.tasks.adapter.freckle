@@ -5,7 +5,7 @@
 - name: "[install virtualbox]"
   include_role:
     name: "freckles-io.install-virtualbox"
-  when: "'virtualbox' in freckle_vars.get('vagrant_providers', [])"
+  when: "'virtualbox' in freckle_vars.get('vagrant_dev_providers', [])"
 
 - name: install vagrant plugins
   install:
@@ -13,4 +13,4 @@
     packages:
       - "{{ item }}"
   with_items:
-    - "{{ freckle_vars.vagrant_plugins | default([]) }}"
+    - "{{ freckle_vars.vagrant_dev_plugins | default([]) }}"
