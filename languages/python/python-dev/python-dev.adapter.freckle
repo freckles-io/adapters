@@ -12,7 +12,8 @@ available_vars:
   python_dev_requirements_files:
     help: "a list of (pip) requirements files to use, defaults to all files in the freckle folder (recursively) which match the glob '.*requirements.*txt'."
   python_dev_setup:
-    help: "whether to use 'pip'  or 'setuptools' as the install command, defaults to 'pip'"  python_dev_setuptools_command:
+    help: "whether to use 'pip'  or 'setuptools' as the install command, defaults to 'pip'"
+  python_dev_setuptools_command:
     help: "if 'setuptools' is used for 'python_dev_setup', this specifies the sub-command it should use to setup, defaults to 'install' (could also be 'develop' for example)"
 
 args:
