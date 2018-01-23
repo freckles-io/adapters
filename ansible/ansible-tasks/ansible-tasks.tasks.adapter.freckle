@@ -1,6 +1,9 @@
 - name: "[calculate task_lists]"
   set_fact:
-    freckle_task_lists: '{{ freckles_metadata | create_result_list_filter("task_lists", {"child_marker": "task_lists", "default_leaf": "task_list", "default_leaf_key": "name", "key_move_map": {"*": "vars"}}) }}'
+    freckle_task_lists: '{{ freckles_metadata | create_result_list_filter("ansible_task_lists", {"child_marker": "ansible_task_lists", "default_leaf": "task_lists", "default_leaf_key": "name", "key_move_map": {"*": "vars"}}) }}'
+
+- debug: var=freckles_metadata
+- debug: var=freckle_task_lists
 
 - name: "[check whether .tasks.freckle file exists]"
   stat:
@@ -9,7 +12,7 @@
 
 - name: "[set default task list]"
   set_fact:
-     default_task_lists: [{'task_list': {'name': '.tasks.freckle'}}]
+     default_task_lists: [{'task_lists': {'name': '.tasks.freckle'}}]
   when: default_tasks_file.stat.exists
 
 - name: "[set default task list]"
@@ -21,8 +24,12 @@
   set_fact:
     task_lists: "{{ freckle_task_lists | first_valid_default_list_filter(default_task_lists, []) }}"
 
+- debug: var=default_task_lists
+- debug: var=freckle_task_lists
+- debug: var=task_lists
+#- fail: msg="SXS"
 - name: including tasks
-  include_tasks: "{{ freckle_path }}/{{ task_file['task_list']['name'] }}"
+  include_tasks: "{{ freckle_path }}/{{ task_file['task_lists']['name'] }}"
   with_items:
     - "{{ task_lists }}"
   loop_control:
