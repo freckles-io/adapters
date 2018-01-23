@@ -10,6 +10,16 @@ role-dependencies:
   - freckles-io.python-dev
   - freckles-io.install-virtualbox
 
+available_vars:
+  dotfiles_unstow:
+    help: "Unstow all currently stowed configuration files/folders instead of stowing."
+  dotfiles_no_stow:
+    help: "Omit the 'stow' step from this run."
+  dotfiles_no_package_install:
+    help: "Don't install any packages in this run."
+  dotfiles_no_folder_install:
+    help: "Don't install any packages via the 'folder name' discovery method."
+
 args:
   pkg_mgr:
     arg_name: pkg-mgr
