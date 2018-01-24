@@ -7,7 +7,7 @@ doc:
     Supported:
       - for now, only Debian Stretch is supported
 
-  short_help: installs and configures a webserver to server a static website
+  short_help: installs and configures a webserver to serve a static website
 
 role-dependencies:
   - geerlingguy.nginx
