@@ -1,5 +1,14 @@
 doc:
-  help: "installs packages referenced in a dotfiles repository, then 'stows' the included dotfiles into the users' home"
+  help: |
+    installs packages referenced in a dotfiles repository, then 'stows' the included dotfiles into the users' home
+
+    A few (random) notes:
+
+      - if you install a package via the npm package manager which was installed by freckles, nodejs won't be in the path automatically. You'll have to have something like those two lines in one of your shell rc files:
+
+          if [ -s "/home/vagrant/.local/opt/nvm/nvm.sh" ]; then source "/home/vagrant/.local/opt/nvm/nvm.sh"; fi
+          if [ -s "/home/vagrant/.local/opt/nvm/nvm.sh" ]; then nvm use node; fi
+
   short_help: installs packages, stows dotfiles
 
 role-dependencies:
@@ -9,6 +18,7 @@ role-dependencies:
   - freckles-io.install-vagrant
   - freckles-io.python-dev
   - freckles-io.install-virtualbox
+  - freckles-io.install-nodejs
 
 available_vars:
   dotfiles_unstow:
