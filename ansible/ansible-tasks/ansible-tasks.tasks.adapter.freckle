@@ -2,8 +2,8 @@
   set_fact:
     freckle_task_lists: '{{ freckles_metadata | create_result_list_filter("ansible_task_lists", {"child_marker": "ansible_task_lists", "default_leaf": "task_lists", "default_leaf_key": "name", "key_move_map": {"*": "vars"}}) }}'
 
-- debug: var=freckles_metadata
-- debug: var=freckle_task_lists
+# - debug: var=freckles_metadata
+# - debug: var=freckle_task_lists
 
 - name: "[check whether .tasks.freckle file exists]"
   stat:
@@ -24,10 +24,11 @@
   set_fact:
     task_lists: "{{ freckle_task_lists | first_valid_default_list_filter(default_task_lists, []) }}"
 
-- debug: var=default_task_lists
-- debug: var=freckle_task_lists
-- debug: var=task_lists
+# - debug: var=default_task_lists
+# - debug: var=freckle_task_lists
+# - debug: var=task_lists
 #- fail: msg="SXS"
+
 - name: including tasks
   include_tasks: "{{ freckle_path }}/{{ task_file['task_lists']['name'] }}"
   with_items:
