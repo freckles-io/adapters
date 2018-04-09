@@ -1,3 +1,12 @@
+---
 doc:
+  author: Markus Binsteiner
+  homepage: https://docs.freckles.io/en/latest/adapters/debug-freckle.html
   help: an adapter to help develop other adapters, it prints out variables at the point just before adapter execution starts.
   short_help: helper adapter, for developing other adapters
+
+tasks_init:
+  - init.debug-freckle.yml
+
+tasks_freckle:
+  - tasks.debug-freckle.yml

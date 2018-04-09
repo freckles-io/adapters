@@ -1,4 +1,7 @@
 doc:
+  author: Markus Binsteiner
+  homepage: https://docs.freckles.io/en/latest/adapters/static-website.html
+  short_help: installs and configures a webserver to serve a static website
   help: |
     Installs and configures a webserver to publish a static website.
 
@@ -7,16 +10,34 @@ doc:
     Supported:
       - for now, only Debian Stretch is supported
 
-  short_help: installs and configures a webserver to serve a static website
+__freckles__:
+  roles:
+    - geerlingguy.nginx
+    - thefinn93.letsencrypt
 
-role-dependencies:
-  - geerlingguy.nginx
-  - thefinn93.letsencrypt
-
-available_vars:
+args:
   static_website_port:
-    help: "the port the webserver should listen on, defaults to 80"
+    alias: port
+    default: 80
+    doc:
+      help: "the port the webserver should listen on"
+    click:
+      option:
+        show_default: true
+        type: int
+        metavar: PORT
   static_website_domain:
-    help: "the domain the static website is hosted on, defaults to '127.0.0.1'"
+    alias: domain
+    type: str
+    required: false
+    default: 127.0.0.1
+    doc:
+      help: "the domain the static website is hosted on"
+    click:
+      option:
+        show_default: true
   letsencrypt_email:
-    help: "the email address to use when requesting a https certificate from the 'letsencrypt'-project, defaults to 'none'. if no email address is specified, no https cert will be requested and https won't be setup. Otherwise the static_website_port will be forwarded to the https port (443)."
+    alias: email
+    required: false
+    doc:
+      help: "the email address to use when requesting a https certificate from the 'letsencrypt'-project, defaults to 'none'. if no email address is specified, no https cert will be requested and https won't be setup. Otherwise the static_website_port will be forwarded to the https port (443)."

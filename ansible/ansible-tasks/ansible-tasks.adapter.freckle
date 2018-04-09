@@ -1,13 +1,25 @@
 doc:
   author: Markus Binsteiner
   homepage: https://docs.freckles.io/en/latest/adapters/ansible-tasks.html
-  help: adapter to execute one or several ansible task lists which are located in a repository
+  help: |
+    Adapter to execute one or several ansible task lists which are located in a repository.
+
+    If you specify the task lists you want to run via command-line arguments, those need to be
+    relative paths, starting from the root of the freckle folder.
+
   short_help: adapter to execute one or several ansible task lists
 
+__freckles__:
+  adapter_priority: 1001
 args:
   ansible_task_lists:
-    default:
-      - ".tasks.freckle"
     doc:
       help: "the relative path (from freckle root) to a task list file, if not specified, this adapter looks for a file called '.tasks.freckle' in the root of the freckle and uses that"
+    click:
+      argument:
+        nargs: -1
+        metavar: TASK_LIST
+        type: str
 
+tasks_freckle:
+  - tasks.ansible-tasks.yml

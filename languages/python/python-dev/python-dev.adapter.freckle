@@ -1,8 +1,12 @@
 doc:
+  author: Markus Binsteiner
+  homepage: https://docs.freckles.io/en/latest/adapters/python-dev.html
   help: "installs a conda or virtualenv environment with all the system- and python dependencies of a python project freckle"
   short_help: "prepares a python development environment"
-role-dependencies:
-  - freckles-io.python-dev
+
+__freckles__:
+  roles:
+    - freckles-io.python-dev
 
 available_vars:
   packages:
@@ -18,19 +22,23 @@ available_vars:
 
 args:
   pkg_mgr:
-    help: the package manager to use, currently supported 'auto', 'conda', 'nix'
-    arg_name: "pkg-mgr"
-    type: str
-    multiple: false
+    alias: "pkg-mgr"
     required: false
     default: "auto"
-    metavar: "PKG_MGR"
-    is_var: true
-  python_version:
-    arg_name: python-version
-    help: the version of python to use to create the environment
     type: str
-    multiple: false
+    doc:
+      help: the package manager to use, currently supported 'auto', 'conda', 'nix'
+    click:
+      option:
+        multiple: false
+        metavar: "PKG_MGR"
+  python_version:
+    alias: python-version
+    type: str
     required: false
-    metavar: "VERSION"
-    is_var: true
+    doc:
+      help: the version of python to use to create the environment
+    click:
+      option:
+        multiple: false
+        metavar: "VERSION"
