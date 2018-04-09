@@ -11,54 +11,60 @@ doc:
 
   short_help: installs packages, stows dotfiles
 
-role-dependencies:
-  - freckles-io.dotfiles
-  - freckles-io.install-nix
-  - freckles-io.install-conda
-  - freckles-io.install-vagrant
-  - freckles-io.python-dev
-  - freckles-io.install-virtualbox
-  - freckles-io.install-nodejs
-
-available_vars:
-  dotfiles_unstow:
-    help: "Unstow all currently stowed configuration files/folders instead of stowing."
-  dotfiles_no_stow:
-    help: "Omit the 'stow' step from this run."
-  dotfiles_no_package_install:
-    help: "Don't install any packages in this run."
-  dotfiles_no_folder_install:
-    help: "Don't install any packages via the 'folder name' discovery method."
+__freckles__:
+  context:
+    - frkl:wordpress
+  roles:
+    - freckles-io.dotfiles
+    - freckles-io.install-nix
+    - freckles-io.install-conda
+    - freckles-io.install-vagrant
+    - freckles-io.python-dev
+    - freckles-io.install-virtualbox
+    - freckles-io.install-nodejs
 
 args:
   pkg_mgr:
-    arg_name: pkg-mgr
-    help: the package manager to use, currently supported 'auto', 'conda', 'nix'
-    type: str
-    multiple: false
+    alias: pkg-mgr
     required: false
-    metavar: "PKG_MGR"
-    is_var: true
+    doc:
+      help: the package manager to use, currently supported 'auto', 'conda', 'nix'
+    click:
+      option:
+        type: str
+        multiple: false
+        metavar: "PKG_MGR"
   unstow:
-    help: unstow all currently stowed config files of this freckle
     required: false
-    is_var: true
-    is_flag: true
+    doc:
+      help: unstow all currently stowed config files of this freckle
+    click:
+      option:
+        is_flag: true
   no_stow:
-    arg_name: no-stow
-    help: prevent 'stowing' of config files
+    alias: no-stow
     required: false
-    is_var: true
-    is_flag: true
+    doc:
+      help: prevent 'stowing' of config files
+    click:
+      option:
+        is_flag: true
   no_package_install:
-    arg_name: no-install
-    help: "don't install any packages"
+    alias: no-install
     required: false
-    is_var: true
-    is_flag: true
+    doc:
+      help: "don't install any packages"
+    click:
+       option:
+         is_flag: true
   no_folder_install:
-    arg_name: no-folder-install
-    help: "don't install any packages from (sub-)folder names"
+    alias: no-folder-install
     required: false
-    is_var: true
-    is_flag: true
+    doc:
+      help: "don't install any packages from (sub-)folder names"
+    click:
+      option:
+        is_flag: true
+
+tasks_init:
+  - init.dotfiles.yml
