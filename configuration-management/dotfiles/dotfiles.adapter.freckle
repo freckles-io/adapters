@@ -24,6 +24,9 @@ __freckles__:
     - freckles-io.install-virtualbox
     - freckles-io.install-nodejs
 
+defaults:
+  target_folder: __auto__
+
 args:
   pkg_mgr:
     alias: pkg-mgr

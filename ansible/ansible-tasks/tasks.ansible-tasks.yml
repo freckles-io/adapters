@@ -29,7 +29,7 @@
 # - debug: var=task_lists
 #- fail: msg="SXS"
 
-- name: including tasks
+- name: "[including tasks]"
   include_tasks: "{{ freckle_path }}/{{ task_file['task_lists']['name'] }}"
   with_items:
     - "{{ task_lists }}"
