@@ -8,5 +8,5 @@ doc:
 tasks_init:
   - init.debug-freckle.yml
 
-tasks_freckle:
+tasks_folder:
   - tasks.debug-freckle.yml

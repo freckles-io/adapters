@@ -21,18 +21,28 @@ available_vars:
     help: "if 'setuptools' is used for 'python_dev_setup', this specifies the sub-command it should use to setup, defaults to 'install' (could also be 'develop' for example)"
 
 args:
-  pkg_mgr:
-    alias: "pkg-mgr"
+  python_dev_project_name:
+    alias: project-name
     required: false
-    default: "auto"
     type: str
     doc:
-      help: the package manager to use, currently supported 'auto', 'conda', 'nix'
+      help: the name of the project, used for naming the development environment, defaults to folder name
     click:
       option:
-        multiple: false
-        metavar: "PKG_MGR"
-  python_version:
+        metavar: NAME
+  python_dev_env_type:
+    alias: "env-type"
+    required: false
+    default: "virtualenv"
+    type: str
+    doc:
+      help: the package manager to use
+    click:
+      option:
+        type:
+          - conda
+          - virtualenv
+  python_dev_python_version:
     alias: python-version
     type: str
     required: false
@@ -42,3 +52,25 @@ args:
       option:
         multiple: false
         metavar: "VERSION"
+  python_dev_setup_type:
+    alias: setup-type
+    default: "pip"
+    doc:
+      help: "how to setup the project once the virtualenv is created, defaults to 'pip'"
+    click:
+      option:
+        type:
+         - pip
+         - setuptools
+  python_dev_requirements_files:
+    alias: requirements_files
+    cli_enabled: false
+    type: list
+    doc:
+      help: "a list of files that contain package requirements, to be installed into the virtual environment"
+
+tasks_init:
+  - init.python-dev.yml
+
+tasks_folder:
+  - tasks.python-dev.yml

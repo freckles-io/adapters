@@ -22,5 +22,5 @@ args:
 tasks_init:
   - init.vagrant-dev.yml
 
-tasks_freckle:
+tasks_folder:
   - tasks.vagrant-dev.yml
