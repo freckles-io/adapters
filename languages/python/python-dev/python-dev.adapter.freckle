@@ -68,9 +68,12 @@ args:
     type: list
     doc:
       help: "a list of files that contain package requirements, to be installed into the virtual environment"
-
-tasks_init:
-  - init.python-dev.yml
+  python_dev_dependency_packages:
+    alias: dependency-packages
+    required: false
+    doc:
+      help: additional (system/conda) packages to be installed
+    cli_enabled: false
 
 tasks_folder:
   - tasks.python-dev.yml
