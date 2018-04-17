@@ -2,6 +2,10 @@
 # - name: "starting vagrant setup for {{ freckle_path }}"
   # debug: msg="starting vagrant setup for {{ freckle_path }}"
 
+- name: "[checking whether to install Vagrant]"
+  include_role:
+    name: "freckles-io.install-vagrant"
+
 - name: "[install virtualbox]"
   include_role:
     name: "freckles-io.install-virtualbox"

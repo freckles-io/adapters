@@ -1,25 +1,20 @@
-- name: "[setting variables]"
-  set_fact:
-    static_website_port: "{{ freckle_folder_vars.static_website_port | default(80) }}"
-    static_website_domain: "{{ freckle_folder_vars.static_website_domain | default('127.0.0.1') }}"
-
 - name: "[enabling letsencrypt]"
   set_fact:
     request_https_cert: true
     static_website_port_new: 443
-  when: "freckle_folder_vars.get('letsencrypt_email', False) and freckle_folder_vars.get('letsencrypt_email', False) not in ['false', 'False', 'no', 'No', 'none', 'None']"
+  when: "letsencrypt_email is defined and (letsencrypt_email == True or letsencrypt_email not in ['false', 'False', 'no', 'No', 'none', 'None'])"
 
 - name: "[disabling letsencrypt]"
   set_fact:
     request_https_cert: false
     static_website_port_new: "{{ static_website_port }}"
-  when: "not freckle_folder_vars.get('letsencrypt_email', False) or freckle_folder_vars.get('letsencrypt_email', False) in ['false', 'False', 'no', 'No', 'none', 'None']"
+  when: "letsencrypt_email is not defined or letsencrypt_email == False or letsencrypt_email in ['false', 'False', 'no', 'No', 'none', 'None']"
 
 - name: "[setting https related stuff]"
   set_fact:
-    letsencrypt_email: "{{ freckle_folder_vars.letsencrypt_email | mandatory }}"
+    web_server_letsencrypt_email: "{{ letsencrypt_email | mandatory }}"
     letsencrypt_cert_domains:
-      - "{{ static_website_domain }}"
+      - "{{ static_website_domain | mandatory }}"
   when: request_https_cert
 
 - name: "managing https certificate for {{ static_website_domain }}"
@@ -73,9 +68,8 @@
     nginx_vhosts: "{{ nginx_vhost_http }} + {{ nginx_vhosts }}"
   when: request_https_cert
 
-
 - name: installing and configuring nginx
-  include_role:
+  import_role:
     name: geerlingguy.nginx
   vars:
     nginx_user: "{{ freckle_owner }}"

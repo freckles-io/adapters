@@ -1,9 +1,8 @@
-- name: "[calculate task_lists]"
-  set_fact:
-    freckle_task_lists: '{{ freckles_metadata | create_result_list_filter("ansible_task_lists", {"child_marker": "ansible_task_lists", "default_leaf": "task_lists", "default_leaf_key": "name", "key_move_map": {"*": "vars"}}) }}'
-
-# - debug: var=freckles_metadata
-# - debug: var=freckle_task_lists
+---
+# moved the following to the freckelize commandline app
+# - name: "[check confirmation]"
+#   fail: msg="As the ansible-tasks adapter can execute arbitrary code, user confirmation is necessary to  use this adatper. Consult the output of 'freckelize ansible-tasks --help' or XXX for more information."
+#   when: ansible_tasks_user_confirmation is not defined or not ansible_tasks_user_confirmation
 
 - name: "[check whether .tasks.freckle file exists]"
   stat:
@@ -12,25 +11,27 @@
 
 - name: "[set default task list]"
   set_fact:
-     default_task_lists: [{'task_lists': {'name': '.tasks.freckle'}}]
+     default_task_lists:
+         - '.tasks.freckle'
   when: default_tasks_file.stat.exists
 
 - name: "[set default task list]"
   set_fact:
-     default_task_lists: ""
+     default_task_lists: []
   when: not default_tasks_file.stat.exists
 
-- name: "[check whether task list is set, otherwise use '.tasks.freckle' file]"
+- name: "[user default task lists]"
   set_fact:
-    task_lists: "{{ freckle_task_lists | first_valid_default_list_filter(default_task_lists, []) }}"
+    task_lists: "{{ default_task_lists }}"
+  when: not ansible_task_lists
 
-# - debug: var=default_task_lists
-# - debug: var=freckle_task_lists
-# - debug: var=task_lists
-#- fail: msg="SXS"
+- name: "[use user provided task lists]"
+  set_fact:
+    task_lists: "{{ ansible_task_lists }}"
+  when: ansible_task_lists
 
 - name: "[including tasks]"
-  include_tasks: "{{ freckle_path }}/{{ task_file['task_lists']['name'] }}"
+  include_tasks: "{{ freckle_path }}/{{ task_file }}"
   with_items:
     - "{{ task_lists }}"
   loop_control:

@@ -19,8 +19,5 @@ args:
     doc:
       help: "the list of vagrant plugins to install"
 
-tasks_init:
-  - init.vagrant-dev.yml
-
 tasks_folder:
   - tasks.vagrant-dev.yml

@@ -1,5 +1,6 @@
 ---
-# freckle_path, freckle_vars, freckle_folder_metadata, freckle_extra_vars, freckle_base_vars, freckle_folder_name, freckle_owner
+# freckle_path, freckle_vars, freckle_profile_vars, freckle_folder_metadata, freckle_extra_vars, freckle_base_vars, freckle_folder_name, freckle_owner, freckle_path_info, freckle_group, freckle_uid, freckle_gid
+
 - name: "[set python_dev_env_type if not already set]"
   set_fact:
     python_dev_env_type: "virtualenv"

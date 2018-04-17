@@ -35,14 +35,15 @@ args:
         type: str
         multiple: false
         metavar: "PKG_MGR"
-  unstow:
+  dotfiles_unstow:
+    alias: unstow
     required: false
     doc:
-      help: unstow all currently stowed config files of this freckle
+      help: unstow all currently stowed config files of this freckle, disables package install
     click:
       option:
         is_flag: true
-  no_stow:
+  dotfiles_no_stow:
     alias: no-stow
     required: false
     doc:
@@ -50,7 +51,7 @@ args:
     click:
       option:
         is_flag: true
-  no_package_install:
+  dotfiles_no_package_install:
     alias: no-install
     required: false
     doc:
@@ -58,7 +59,7 @@ args:
     click:
        option:
          is_flag: true
-  no_folder_install:
+  dotfiles_no_folder_install:
     alias: no-folder-install
     required: false
     doc:
@@ -66,6 +67,21 @@ args:
     click:
       option:
         is_flag: true
+  dotfiles_stow_target:
+    alias: stow-target
+    cli_enabled: false
+    doc:
+      help: "the base folder to use as a stow target"
+  dotfiles_stow_delete_conflicts:
+    alias: delete-conflicts
+    cli_enabled: false
+    doc:
+      help: "whether to delete existing targets before a stow run"
+  dotfiles_stow_become:
+    alias: stow-become
+    cli_enabled: false
+    doc:
+      help: "whether to use root permissions with 'stow'"
 
-tasks_init:
-  - init.dotfiles.yml
+tasks_folder:
+  - tasks.dotfiles.yml

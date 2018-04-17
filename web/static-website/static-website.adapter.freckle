@@ -39,5 +39,9 @@ args:
   letsencrypt_email:
     alias: email
     required: false
+    default: false
     doc:
       help: "the email address to use when requesting a https certificate from the 'letsencrypt'-project, defaults to 'none'. if no email address is specified, no https cert will be requested and https won't be setup. Otherwise the static_website_port will be forwarded to the https port (443)."
+
+tasks_folder:
+  - tasks.static-website.yml

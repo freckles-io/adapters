@@ -20,6 +20,13 @@ args:
         nargs: -1
         metavar: TASK_LIST
         type: str
+  ansible_tasks_user_confirmation:
+    alias: YES-I-AM-AWARE-RUNNING-ANSIBLE-TASKS-CAN-BE-DANGEROUS-BUT-KNOW-WHAT-I-AM-DOING
+    doc:
+      help: "in order to run this adapter, it's necessary for the user to confirm they understood it's implication. more information: XXX"
+    click:
+      option:
+        is_flag: true
 
 tasks_folder:
   - tasks.ansible-tasks.yml
