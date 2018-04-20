@@ -83,5 +83,8 @@ args:
     doc:
       help: "whether to use root permissions with 'stow'"
 
-tasks_folder:
-  - tasks.dotfiles.yml
+tasks:
+
+  - name: "[starting dotfile adapter execution]"
+    import_role:
+      name: "freckles-io.dotfiles"
